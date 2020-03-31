@@ -4,10 +4,44 @@ import {
   PrimaryButton,
   Link,
   TextField,
-  Stack
+  Stack,
+  MessageBar,
+  MessageBarType
 } from '@fluentui/react';
 import { useForm, Controller } from 'react-hook-form';
+import { useHistory, useLocation } from 'react-router-dom';
+
 import useAuthentication from '../hooks/useAuthentication';
+
+const demoUsers = [
+  {
+    username: 'simmy',
+    password: '123456',
+    roles: ['admin']
+  },
+  {
+    username: 'admin',
+    password: '123456',
+    roles: ['admin']
+  }
+];
+
+function authenticate({ username, password }) {
+  const found = demoUsers.find(
+    user => username.toLocaleLowerCase() === user.username
+  );
+
+  if (found && found.password === password) {
+    return Promise.resolve({
+      username: found.username,
+      token: username + '_' + Math.random(),
+      displayName: found.displayName,
+      roles: found.roles
+    });
+  } else {
+    return Promise.reject('错误的用户名或密码');
+  }
+}
 
 function LoginForm() {
   const { isAuthenticated, principal, login, logout } = useAuthentication();
@@ -15,9 +49,16 @@ function LoginForm() {
   const { handleSubmit, control, errors } = useForm({
     mode: 'onBlur'
   });
+  const [error, setError] = React.useState();
 
-  const onSubmit = data => {
-    login({ username: data.username });
+  const onSubmit = values => {
+    setError(null);
+    authenticate(values)
+      .then(identity => {
+        login(identity);
+        history.replace(from);
+      })
+      .catch(setError);
   };
 
   const handleLogout = () => {
@@ -28,7 +69,9 @@ function LoginForm() {
     return errors[name] ? errors[name].message : null;
   };
 
-  console.info(errors);
+  const history = useHistory();
+  const location = useLocation();
+  const { from } = location.state || { from: { pathname: '/dashboard' } };
 
   return (
     <Stack style={{ margin: '10em auto', width: '30em' }}>
@@ -82,6 +125,13 @@ function LoginForm() {
               <Link>找回密码</Link>
               <PrimaryButton type="submit">登录</PrimaryButton>
             </Stack>
+            {error && (
+              <MessageBar
+                messageBarType={MessageBarType.error}
+                onDismiss={() => setError(null)}>
+                {error}
+              </MessageBar>
+            )}
           </Stack>
         </form>
       )}

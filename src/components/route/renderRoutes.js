@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import flattenDeep from 'lodash/flattenDeep';
 import AuthorizedRoute from './AuthorizedRoute';
 import ComingSoon from './ComingSoon';
@@ -41,6 +41,9 @@ export function renderRoutes(routes) {
   // console.log(flatRouteComponents);
   return (
     <Switch>
+      <Route exact path="/">
+        <Redirect to="/dashboard" />
+      </Route>
       {flatRouteComponents}
       <Route path="*">
         <NoMatch />
