@@ -3,10 +3,16 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { initializeIcons } from '@uifabric/icons';
+import { Fabric } from 'office-ui-fabric-react';
+
+initializeIcons();
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Fabric>
+      <App />
+    </Fabric>
   </React.StrictMode>,
   document.getElementById('root')
 );
