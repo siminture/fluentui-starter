@@ -1,101 +1,92 @@
 import React from 'react';
 import isArray from 'lodash/isArray';
-import { useHistory, useLocation, matchPath } from 'react-router-dom';
-import { useSessionStorage } from 'react-use';
-import { findHierarchical } from '../../libraries/hierarchize';
+import { useHistory } from 'react-router-dom';
 import { NavToggler } from './Nav';
-import routes from '../../routes';
+import routeConfig from '../../routeConfig';
+import useRoutePath from '../route/useRoutePath';
+
+function isVisible(route) {
+  return route.isHidden !== true;
+}
+
+function hasChildren(route) {
+  return isArray(route.children) && route.children.filter(isVisible).length > 0;
+}
 
 function Sidebar() {
   const history = useHistory();
-  const location = useLocation();
 
-  const homeLinkGroups = [
+  const { current, paths } = useRoutePath();
+  const selectedKey = current ? current.uniqueKey : null;
+
+  const mapRouteToNavLink = (route, deeply = true) => {
+    const isGroup = hasChildren(route);
+    return {
+      name: route.name,
+      key: route.uniqueKey,
+      alternateText: route.name,
+      title: route.name,
+      url: route.path,
+      onClick: e => {
+        e.preventDefault();
+        history.push(route.path);
+      },
+      isExpanded:
+        deeply &&
+        isGroup &&
+        paths.some(that => that.uniqueKey === route.uniqueKey),
+      links:
+        deeply && isGroup
+          ? route.children
+              .filter(isVisible)
+              .map(child => mapRouteToNavLink(child, deeply))
+          : undefined,
+      icon: route.icon ? route.icon : isGroup ? 'DocumentSet' : 'TextDocument'
+    };
+  };
+
+  const homeLink = mapRouteToNavLink(routeConfig, false);
+  const topPageLinks = routeConfig.children
+    .filter(route => isVisible(route) && !isArray(route.children))
+    .map(route => mapRouteToNavLink(route, false));
+
+  const groupLinks = routeConfig.children
+    .filter(route => hasChildren(route))
+    .map(route => {
+      return {
+        name: route.name,
+        groupType: 'MenuGroup',
+        links: route.children
+          .filter(isVisible)
+          .map(child => mapRouteToNavLink(child, true))
+      };
+    });
+
+  const navLinkGroups = [
     {
       links: [
         {
+          key: 'Collapse',
           name: 'Collapsed',
           alternateText: 'Expanded',
           icon: 'GlobalNavButton',
-          key: 'Collapsed',
-          title: '展开菜单'
+          title: 'Collapse'
         }
       ],
       groupType: 'ToggleGroup'
     },
     {
-      links: [
-        {
-          name: '主页',
-          isExpanded: true,
-          icon: 'Home',
-          key: 'home',
-          onClick: () => history.push('/')
-        }
-      ],
+      links: [homeLink, ...topPageLinks],
       groupType: 'MenuGroup'
-    }
+    },
+    ...groupLinks
   ];
-
-  const mapRoutesToNavLinks = ({ uniqueKey, name, path, children }) => {
-    const isGroup = isArray(children);
-    return {
-      name,
-      key: uniqueKey,
-      alternateText: name,
-      title: name,
-      url: path,
-      onClick: e => {
-        e.preventDefault();
-        e.stopPropagation();
-        history.push(path);
-      },
-      // isExpanded: isGroup && some(paths, route => route.key === key),
-      links: isGroup ? children.map(mapRoutesToNavLinks) : undefined,
-      icon: isGroup ? 'DocumentSet' : 'TextDocument'
-    };
-  };
-
-  const mapRouteToNavGroup = route => {
-    return {
-      name: route.name,
-      groupType: 'MenuGroup',
-      links: route.children.map(mapRoutesToNavLinks)
-    };
-  };
-
-  const pageLinkGroups = routes
-    .filter(route => isArray(route.children) && route.children.length > 0)
-    .map(mapRouteToNavGroup);
-
-  const navLinkGroups = homeLinkGroups.concat(pageLinkGroups);
-
-  const [isNavCollapsed, setIsNavCollapsed] = useSessionStorage(
-    'isNavCollapsed',
-    false
-  );
-
-  let selectedKey = null;
-
-  if (location.pathname === '/') {
-    selectedKey = 'home';
-  } else {
-    const matcher = route => {
-      const match = matchPath(location.pathname, route);
-      return match && match.isExact;
-    };
-    const currentPage = findHierarchical(routes, matcher);
-    selectedKey = currentPage ? currentPage.uniqueKey : null;
-    console.log(currentPage, selectedKey);
-  }
 
   return (
     <NavToggler
       groups={navLinkGroups}
       enableCustomization={true}
       selectedKey={selectedKey}
-      isNavCollapsed={isNavCollapsed}
-      onNavCollapsedCallback={setIsNavCollapsed}
     />
   );
 }

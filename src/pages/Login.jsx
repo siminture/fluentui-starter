@@ -11,7 +11,7 @@ import {
 import { useForm, Controller } from 'react-hook-form';
 import { useHistory, useLocation } from 'react-router-dom';
 
-import useAuthentication from '../hooks/useAuthentication';
+import { useAuthentication } from '../components/authentication';
 
 const demoUsers = [
   {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from '@fluentui/react';
+import RouteLink from './RouteLink';
 
 function RouteIndex({ route }) {
   return (
@@ -8,10 +8,8 @@ function RouteIndex({ route }) {
         <h3>Index of {route.name}</h3>
       </dt>
       {route.children.map(child => (
-        <dd>
-          <Link key={child.key} href={child.path}>
-            {child.name}
-          </Link>
+        <dd key={child.key}>
+          <RouteLink href={child.path}>{child.name}</RouteLink>
         </dd>
       ))}
     </dl>

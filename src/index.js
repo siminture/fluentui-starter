@@ -1,18 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { initializeIcons } from '@uifabric/icons';
-import { Fabric } from 'office-ui-fabric-react';
+import { Fabric } from '@fluentui/react';
+import { AuthenticationProvider } from './components/authentication';
+import App from './App';
 
 initializeIcons();
 
 ReactDOM.render(
   <React.StrictMode>
-    <Fabric>
-      <App />
-    </Fabric>
+    <AuthenticationProvider>
+      <Fabric>
+        <App />
+      </Fabric>
+    </AuthenticationProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

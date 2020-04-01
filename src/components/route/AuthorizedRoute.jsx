@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import useAuthentication from '../../hooks/useAuthentication';
+import { useAuthentication } from '../authentication';
 
 export default function AuthorizedRoute({
   id,

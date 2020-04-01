@@ -1,16 +1,16 @@
-import * as React from "react";
-import { Nav } from "./Nav";
-import { SlimNav } from "./SlimNav";
-import { getStyles } from "./Nav.styles";
+import * as React from 'react';
+import { Nav } from './Nav';
+import { SlimNav } from './SlimNav';
+import { getStyles } from './Nav.styles';
 import {
   styled,
   classNamesFunction
-} from "office-ui-fabric-react/lib/Utilities";
-import { NavLink } from "./NavLink";
+} from 'office-ui-fabric-react/lib/Utilities';
+import { NavLink } from './NavLink';
 import {
   FocusZone,
   FocusZoneDirection
-} from "office-ui-fabric-react/lib/FocusZone";
+} from 'office-ui-fabric-react/lib/FocusZone';
 
 const getClassNames = classNamesFunction();
 
@@ -40,11 +40,11 @@ class NavTogglerComponent extends React.Component {
     });
 
     const toggleNavGroups = groups.filter(navGroup => {
-      return !!navGroup && navGroup.groupType === "ToggleGroup";
+      return !!navGroup && navGroup.groupType === 'ToggleGroup';
     });
 
     const nonToggleNavGroups = groups.filter(navGroup => {
-      return !!navGroup && navGroup.groupType !== "ToggleGroup";
+      return !!navGroup && navGroup.groupType !== 'ToggleGroup';
     });
 
     return (

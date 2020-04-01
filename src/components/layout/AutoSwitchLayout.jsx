@@ -1,5 +1,5 @@
 import React from 'react';
-import useAuthentication from '../../hooks/useAuthentication';
+import { useAuthentication } from '../authentication';
 import MasterLayout from './MasterLayout';
 import BlankLayout from './BlankLayout';
 
