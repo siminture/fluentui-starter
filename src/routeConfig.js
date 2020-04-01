@@ -72,7 +72,17 @@ const routeConfig = hierarchize(
           {
             key: 'settings',
             name: 'Settings',
-            icon: 'Settings'
+            icon: 'Settings',
+            children:[
+              {
+                key: 'list',
+                name: 'List',
+              },
+              {
+                key: 'unit',
+                name: 'Unit',
+              }
+            ]
           }
         ]
       }

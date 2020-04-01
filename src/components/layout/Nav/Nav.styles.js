@@ -8,13 +8,8 @@ const shortenedIconWidth = 32;
 const navFloatingWidth = 230;
 const navItemHeight = 48;
 const navChildItemHeight = 32;
-const navBackgroundColor = "#E5E5E5";
-const floatingNavBackgroundColor = "rgba(255,255,255,1)";
-const navItemHoverColor = "#CCCCCC";
 const navGroupSeparatorItemHeight = 40;
 const navGroupSeparatorWithGroupNameHeight = 70;
-const navItemWithChildBgColor = "#CCCCCC";
-const navItemSelectedColor = "#B7B7B7";
 const navItemIndentSize = 50;
 const navFloatingItemIndentSize = 20;
 const BackDropSelector =
@@ -31,11 +26,11 @@ export const getStyles = props => {
     hasGroupName,
     theme
   } = props;
-
   return {
     root: {
       width: isCollapsed ? navCollapsedWidth : navWidth,
-      backgroundColor: navBackgroundColor,
+      height: '100vh',
+      backgroundColor: theme.palette.neutralLight,
       color: navTextColor,
       selectors: {
         ul: {
@@ -66,11 +61,11 @@ export const getStyles = props => {
       selectors: {
         ":hover": {
           backgroundColor: hasChildren
-            ? navItemWithChildBgColor
-            : navItemHoverColor
+            ? theme.palette.neutralQuaternaryAlt
+            : theme.palette.neutralQuaternary
         },
         ":active": {
-          backgroundColor: navItemSelectedColor
+          backgroundColor: theme.palette.neutralQuaternary
         }
       }
     },
@@ -118,8 +113,8 @@ export const getStyles = props => {
       selectors: {
         ":hover": {
           backgroundColor: hasChildren
-            ? navItemWithChildBgColor
-            : navItemHoverColor
+          ? theme.palette.neutralQuaternaryAlt
+          : theme.palette.neutralQuaternary
         }
       }
     },
@@ -135,7 +130,7 @@ export const getStyles = props => {
         color: navTextColor,
         boxShadow:
           "0px 1.2px 3.6px rgba(0, 0, 0, 0.18), 0px 6.4px 14.4px rgba(0, 0, 0, 0.22)",
-        backgroundColor: floatingNavBackgroundColor,
+        backgroundColor: 'red',
         opacity: "0.6",
         selectors: {
           [BackDropSelector]: {
@@ -156,16 +151,16 @@ export const getStyles = props => {
         !!nestingLevel && nestingLevel > 0 ? navChildItemHeight : navItemHeight,
       cursor: "pointer",
       backgroundColor: !(nestingLevel && nestingLevel > 0)
-        ? navItemHoverColor
-        : floatingNavBackgroundColor,
+       ? theme.palette.neutralQuaternaryAlt
+            : theme.palette.neutralQuaternary,
       paddingLeft: navFloatingItemIndentSize,
       selectors: {
         ":hover": {
           backgroundColor:
-            !!nestingLevel && nestingLevel > 0 ? navItemHoverColor : "unset"
+            !!nestingLevel && nestingLevel > 0 ? theme.palette.neutralQuaternaryAlt : "unset"
         },
         ":active": {
-          backgroundColor: navItemSelectedColor
+          backgroundColor: theme.palette.neutralQuaternary
         }
       }
     },
@@ -179,7 +174,7 @@ export const getStyles = props => {
     navGroupSeparatorHrLine: {
       position: "relative",
       height: "20px",
-      borderBottom: `1px solid ${navItemWithChildBgColor}`
+      borderBottom: `1px solid ${theme.palette.neutralQuaternaryAlt}`
     },
     navGroupSeparatorHeaderGroupName: {
       position: "absolute",
@@ -193,7 +188,7 @@ export const getStyles = props => {
       cursor: "pointer",
       selectors: {
         ":hover": {
-          backgroundColor: navItemHoverColor
+          backgroundColor: theme.palette.neutralQuaternaryAlt
         }
       },
       textAlign: "left"

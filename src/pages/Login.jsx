@@ -6,7 +6,9 @@ import {
   TextField,
   Stack,
   MessageBar,
-  MessageBarType
+  MessageBarType,
+  styled,
+  classNamesFunction
 } from '@fluentui/react';
 import { useForm, Controller } from 'react-hook-form';
 import { useHistory, useLocation } from 'react-router-dom';
@@ -15,18 +17,18 @@ import { useAuthentication } from '../components/authentication';
 
 const demoUsers = [
   {
-    username: 'simmy',
-    password: '123456',
+    username: 'admin',
+    password: 'admin',
     roles: ['admin']
   },
   {
-    username: 'admin',
-    password: '123456',
-    roles: ['admin']
+    username: 'demo',
+    password: 'demo',
+    roles: ['user']
   }
 ];
 
-function authenticate({ username, password }) {
+function remoteAuthService({ username, password }) {
   const found = demoUsers.find(
     user => username.toLocaleLowerCase() === user.username
   );
@@ -39,13 +41,32 @@ function authenticate({ username, password }) {
       roles: found.roles
     });
   } else {
-    return Promise.reject('错误的用户名或密码');
+    return Promise.reject('Incorrect username or password');
   }
 }
 
-function LoginForm() {
-  const { isAuthenticated, principal, login, logout } = useAuthentication();
+function getStyles({ theme }) {
+  console.info(theme);
+  return {
+    root: {
+      margin: '10em auto',
+      width: '30em',
+      backgroundColor: theme.palette.neutralLight,
+      padding: theme.spacing.l2,
+      borderRadius: theme.effects.roundedCorner2
+    },
+    title: {
+      ...theme.fonts.xLargePlus,
+      marginTop: 0
+    }
+  };
+}
 
+const getClassNames = classNamesFunction();
+
+function LoginForm({ theme, styles }) {
+  const classNames = getClassNames(styles, { theme });
+  const { isAuthenticated, principal, login, logout } = useAuthentication();
   const { handleSubmit, control, errors } = useForm({
     mode: 'onBlur'
   });
@@ -53,16 +74,12 @@ function LoginForm() {
 
   const onSubmit = values => {
     setError(null);
-    authenticate(values)
+    remoteAuthService(values)
       .then(identity => {
         login(identity);
         history.replace(from);
       })
       .catch(setError);
-  };
-
-  const handleLogout = () => {
-    logout();
   };
 
   const getErrorMessage = name => {
@@ -71,13 +88,44 @@ function LoginForm() {
 
   const history = useHistory();
   const location = useLocation();
-  const { from } = location.state || { from: { pathname: '/dashboard' } };
+  const { from } = location.state || { from: { pathname: '/' } };
+
+  console.info(theme);
 
   return (
-    <Stack style={{ margin: '10em auto', width: '30em' }}>
+    <Stack className={classNames.root}>
+      {isAuthenticated && (
+        <Stack
+          tokens={{
+            childrenGap: '1em'
+          }}>
+          <h3 className={classNames.title}>
+            {principal.username}, you are already signed in.
+          </h3>
+          <Stack
+            horizontal
+            tokens={{
+              childrenGap: '1em'
+            }}>
+            <PrimaryButton
+              onClick={() => history.push('/')}
+              iconProps={{ iconName: 'Home' }}>
+              Go to Home
+            </PrimaryButton>
+            <DefaultButton
+              onClick={() => {
+                logout();
+              }}
+              iconProps={{ iconName: 'SignOut' }}>
+              Logout
+            </DefaultButton>
+          </Stack>
+        </Stack>
+      )}
+
       {!isAuthenticated && (
         <form onSubmit={handleSubmit(onSubmit)}>
-          <h3>登录</h3>
+          <h3 className={classNames.title}>Login</h3>
           <Stack
             tokens={{
               childrenGap: '1em'
@@ -85,22 +133,27 @@ function LoginForm() {
             <Controller
               as={TextField}
               control={control}
-              label="用户名"
+              label="Username"
               autoComplete="username"
               errorMessage={getErrorMessage('username')}
               autoFocus
+              minLength={3}
+              maxLength={32}
               name="username"
               rules={{
-                required: '用户名必须提供',
-                minLength: { value: 3, message: '用户名不能少于3个字符' },
-                maxLength: { value: 50, message: '用户名不能超过50个字符' }
+                required: 'Please enter your username',
+                minLength: {
+                  value: 3,
+                  message: 'Please enter your username'
+                },
+                maxLength: { value: 32, message: 'Username is too long' }
               }}
             />
 
             <Controller
               as={
                 <TextField
-                  label="密码"
+                  label="Password"
                   type="password"
                   autoComplete="current-password"
                   errorMessage={getErrorMessage('password')}
@@ -109,10 +162,15 @@ function LoginForm() {
               name="password"
               control={control}
               defaultValue=""
+              minLength={4}
+              maxLength={64}
               rules={{
-                required: '密码必须提供',
-                minLength: { value: 6, message: '密码不能少于6个字符' },
-                maxLength: { value: 50, message: '密码不能超过50个字符' }
+                required: 'Please enter your password',
+                minLength: {
+                  value: 4,
+                  message: 'Please enter your password'
+                },
+                maxLength: { value: 64, message: 'Password is too long' }
               }}
             />
 
@@ -122,8 +180,8 @@ function LoginForm() {
               tokens={{
                 childrenGap: '1em'
               }}>
-              <Link>找回密码</Link>
-              <PrimaryButton type="submit">登录</PrimaryButton>
+              <Link>Find my password</Link>
+              <PrimaryButton type="submit">Login</PrimaryButton>
             </Stack>
             {error && (
               <MessageBar
@@ -135,15 +193,8 @@ function LoginForm() {
           </Stack>
         </form>
       )}
-
-      {isAuthenticated && (
-        <div>
-          <h3>{principal.username} 您已登录，欢迎你！</h3>
-          <DefaultButton onClick={handleLogout}>Logout</DefaultButton>
-        </div>
-      )}
     </Stack>
   );
 }
 
-export default LoginForm;
+export default styled(LoginForm, getStyles);
