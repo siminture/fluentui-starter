@@ -1,6 +1,11 @@
 ## A Fluent UI Starter for Admin Application
 
-### Configurated Routes based on react-router-dom
+### Features
+* Configurable Route based on react-router-dom
+* Authentication Component and Login Page based on react-hook-form
+* Sidebar Layout, the nav items read from routeConfig
+
+### Route Config
 ```javascript
 const routeConfig = hierarchize(
   {
@@ -77,13 +82,11 @@ const routeConfig = hierarchize(
 );
 
 ```
-
-### Login Page based on react-hook-form
+#### Login page
 
 ![Login Page](https://github.com/siminture/fluentui-starter/blob/master/login.PNG)
 
-### Sidebar Layout
+#### Sidebar Layout
 
-. Sidebar read data from routeConfig
 ![Sidebar Layout](https://github.com/siminture/fluentui-starter/blob/master/dashboard.PNG)
 
