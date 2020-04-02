@@ -4,6 +4,7 @@
 * Configurable Route based on react-router-dom
 * Authentication Component and Login Page based on react-hook-form
 * Sidebar Layout, the nav items read from routeConfig
+* Dark Theme
 
 ### Route Config
 ```javascript
@@ -18,8 +19,8 @@ const routeConfig = hierarchize(
       {
         key: 'login',
         name: 'Login',
-        isPublic: true,
-        isHidden: true,
+        isPublic: true, // no need to authenticate
+        isHidden: true, // hide in sidebar
         component: React.lazy(() => import('./pages/Login'))
       },
       {
@@ -38,43 +39,7 @@ const routeConfig = hierarchize(
           }
         ]
       },
-      {
-        key: 'mangement',
-        name: 'System Management',
-        icon: 'managementApp',
-        children: [
-          {
-            key: 'organization',
-            name: 'Organization',
-            icon: 'Org'
-          },
-          {
-            key: 'user',
-            name: 'User',
-            icon: 'People'
-          },
-          {
-            key: 'authority',
-            name: 'Authority',
-            icon: 'SecurityGroup'
-          },
-          {
-            key: 'settings',
-            name: 'Settings',
-            icon: 'Settings',
-            children:[
-              {
-                key: 'list',
-                name: 'List',
-              },
-              {
-                key: 'unit',
-                name: 'Unit',
-              }
-            ]
-          }
-        ]
-      }
+      // ...etc
     ]
   },
   null,
@@ -82,11 +47,21 @@ const routeConfig = hierarchize(
 );
 
 ```
+
+### Screenshots
+
+
 #### Login page
 
-![Login Page](https://github.com/siminture/fluentui-starter/blob/master/login.PNG)
+![Login Page](https://github.com/siminture/fluentui-starter/blob/master/screenshots/login.PNG)
+
+![Login Page Dark](https://github.com/siminture/fluentui-starter/blob/master/screenshots/login_dark.PNG)
+
 
 #### Sidebar Layout
 
-![Sidebar Layout](https://github.com/siminture/fluentui-starter/blob/master/dashboard.PNG)
+![Dashboard](https://github.com/siminture/fluentui-starter/blob/master/screenshots/dashboard.PNG)
 
+![Dashboard Dark](https://github.com/siminture/fluentui-starter/blob/master/screenshots/dashboard_dark.PNG)
+
+![PurchaseOrder](https://github.com/siminture/fluentui-starter/blob/master/screenshots/purchaseOrder.PNG)
