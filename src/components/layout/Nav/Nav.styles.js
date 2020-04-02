@@ -1,19 +1,4 @@
-import { AnimationClassNames, getFocusStyle } from "office-ui-fabric-react";
-
-const navFontSize = 14;
-const navTextColor = "#FFF";
-const navWidth = 280;
-const navCollapsedWidth = 48;
-const shortenedIconWidth = 32;
-const navFloatingWidth = 230;
-const navItemHeight = 48;
-const navChildItemHeight = 32;
-const navGroupSeparatorItemHeight = 40;
-const navGroupSeparatorWithGroupNameHeight = 70;
-const navItemIndentSize = 50;
-const navFloatingItemIndentSize = 20;
-const BackDropSelector =
-  "@supports (backdrop-filter: blur(20px)) or (-webkit-backdrop-filter: blur(20px))";
+import { AnimationClassNames, getFocusStyle } from 'office-ui-fabric-react';
 
 export const getStyles = props => {
   const {
@@ -26,59 +11,84 @@ export const getStyles = props => {
     hasGroupName,
     theme
   } = props;
+  const { semanticColors, fonts } = theme;
+
+  const navFontSize = fonts.medium.fontSize;
+  const navTextColor = semanticColors.menuItemText;
+  const navWidth = 280;
+  const navCollapsedWidth = 48;
+  const shortenedIconWidth = 32;
+  const navFloatingWidth = 230;
+  const navItemHeight = 48;
+  const navChildItemHeight = 32;
+  const navBackgroundColor = semanticColors.menuBackground;
+  const floatingNavBackgroundColor = semanticColors.menuBackground;
+  const navItemHoverColor = semanticColors.menuItemBackgroundHovered;
+  const navGroupSeparatorItemHeight = 40;
+  const navGroupSeparatorWithGroupNameHeight = 70;
+  const navItemWithChildBgColor = semanticColors.menuItemBackgroundPressed;
+  const navItemSelectedColor = semanticColors.menuItemBackgroundPressed;
+  const navItemIndentSize = 50;
+  const navFloatingItemIndentSize = 20;
+  const BackDropSelector =
+    '@supports (backdrop-filter: blur(20px)) or (-webkit-backdrop-filter: blur(20px))';
+
   return {
     root: {
       width: isCollapsed ? navCollapsedWidth : navWidth,
       height: '100vh',
-      backgroundColor: theme.palette.neutralLight,
+      backgroundColor: navBackgroundColor,
       color: navTextColor,
+      borderRightStyle: 'solid',
+      borderRightWidth: '1px',
+      borderRightColor: semanticColors.bodyFrameDivider,
       selectors: {
         ul: {
-          listStyleType: "none",
+          listStyleType: 'none',
           padding: 0,
           margin: 0,
           fontSize: navFontSize,
           selectors: {
-            "li:hover >div": {
-              display: "block"
+            'li:hover >div': {
+              display: 'block'
             }
           }
         },
         a: {
           color: `${navTextColor} !important`,
-          outline: "none"
+          outline: 'none'
         }
       }
     },
     navItemRoot: {
       height:
         !!nestingLevel && nestingLevel > 0 ? navChildItemHeight : navItemHeight,
-      cursor: "pointer",
+      cursor: 'pointer',
       paddingLeft:
         !!nestingLevel && nestingLevel > 0
           ? nestingLevel * navItemIndentSize
-          : "inherit",
+          : 'inherit',
       selectors: {
-        ":hover": {
+        ':hover': {
           backgroundColor: hasChildren
-            ? theme.palette.neutralQuaternaryAlt
-            : theme.palette.neutralQuaternary
+            ? navItemWithChildBgColor
+            : navItemHoverColor
         },
-        ":active": {
-          backgroundColor: theme.palette.neutralQuaternary
+        ':active': {
+          backgroundColor: navItemSelectedColor
         }
       }
     },
     navItemBarMarker: {
       marginLeft:
-        !!nestingLevel && nestingLevel > 0 && !hasChildren ? "-10px" : "6px",
+        !!nestingLevel && nestingLevel > 0 && !hasChildren ? '-10px' : '6px',
       marginRight:
-        !!nestingLevel && nestingLevel > 0 && !hasChildren ? "8px" : "0px",
-      marginTop: !!nestingLevel && nestingLevel > 0 ? "7px" : "12px",
-      width: "2px",
-      height: !!nestingLevel && nestingLevel > 0 ? "18px" : "24px",
-      backgroundColor: "#0078D4",
-      display: isSelected || isChildLinkSelected ? "inline-block" : "none",
+        !!nestingLevel && nestingLevel > 0 && !hasChildren ? '8px' : '0px',
+      marginTop: !!nestingLevel && nestingLevel > 0 ? '7px' : '12px',
+      width: '2px',
+      height: !!nestingLevel && nestingLevel > 0 ? '18px' : '24px',
+      backgroundColor: '#0078D4',
+      display: isSelected || isChildLinkSelected ? 'inline-block' : 'none',
       borderWidth: 0
     },
     navItemIconColumn: {
@@ -86,61 +96,61 @@ export const getStyles = props => {
         isSelected || isChildLinkSelected
           ? shortenedIconWidth
           : navCollapsedWidth,
-      fontSize: "16px",
+      fontSize: '16px',
       lineHeight:
         !!nestingLevel && nestingLevel > 0 ? navChildItemHeight : navItemHeight,
-      textAlign: "center",
-      color: "#000000",
-      verticalAlign: "top"
+      textAlign: 'center',
+      color: navTextColor,
+      verticalAlign: 'top'
     },
     navItemNameColumn: {
-      width: "100%",
+      width: '100%',
       marginLeft:
         isChildLinkSelected ||
         (!hasChildren && isSelected && !(nestingLevel && nestingLevel > 0))
-          ? "8px"
-          : "0px",
+          ? '8px'
+          : '0px',
       lineHeight:
         !!nestingLevel && nestingLevel > 0 ? navChildItemHeight : navItemHeight,
-      verticalAlign: "top",
-      display: "inline-block",
-      textOverflow: "ellipsis",
-      overflow: "hidden",
-      whiteSpace: "nowrap",
-      color: "#000000"
+      verticalAlign: 'top',
+      display: 'inline-block',
+      textOverflow: 'ellipsis',
+      overflow: 'hidden',
+      whiteSpace: 'nowrap',
+      color: navTextColor
     },
     navSlimItemRoot: {
       selectors: {
-        ":hover": {
+        ':hover': {
           backgroundColor: hasChildren
-          ? theme.palette.neutralQuaternaryAlt
-          : theme.palette.neutralQuaternary
+            ? navItemWithChildBgColor
+            : navItemHoverColor
         }
       }
     },
     navFloatingRoot: [
       {
-        display: "none",
+        display: 'none',
         zIndex: 1901,
-        position: "absolute",
+        position: 'absolute',
         marginLeft: navCollapsedWidth,
         marginTop:
           -navItemHeight - (!!scrollTop && scrollTop > 0 ? scrollTop : 0),
         width: navFloatingWidth,
         color: navTextColor,
         boxShadow:
-          "0px 1.2px 3.6px rgba(0, 0, 0, 0.18), 0px 6.4px 14.4px rgba(0, 0, 0, 0.22)",
-        backgroundColor: 'red',
-        opacity: "0.6",
+          '0px 1.2px 3.6px rgba(0, 0, 0, 0.18), 0px 6.4px 14.4px rgba(0, 0, 0, 0.22)',
+        backgroundColor: floatingNavBackgroundColor,
+        opacity: '0.6',
         selectors: {
           [BackDropSelector]: {
-            webkitBackdropFilter: "blur(20px) saturate(125%)",
-            backdropFilter: "blur(20px) saturate(125%)",
-            backgroundColor: "rgba(255,255,255,.6)"
+            webkitBackdropFilter: 'blur(20px) saturate(125%)',
+            backdropFilter: 'blur(20px) saturate(125%)',
+            backgroundColor: 'rgba(255,255,255,.6)'
           },
           a: {
-            width: "100%",
-            backgroundColor: "inherit"
+            width: '100%',
+            backgroundColor: 'inherit'
           }
         }
       },
@@ -149,49 +159,48 @@ export const getStyles = props => {
     navFloatingItemRoot: {
       height:
         !!nestingLevel && nestingLevel > 0 ? navChildItemHeight : navItemHeight,
-      cursor: "pointer",
+      cursor: 'pointer',
       backgroundColor: !(nestingLevel && nestingLevel > 0)
-       ? theme.palette.neutralQuaternaryAlt
-            : theme.palette.neutralQuaternary,
+        ? navItemHoverColor
+        : floatingNavBackgroundColor,
       paddingLeft: navFloatingItemIndentSize,
       selectors: {
-        ":hover": {
-          backgroundColor:
-            !!nestingLevel && nestingLevel > 0 ? theme.palette.neutralQuaternaryAlt : "unset"
+        ':hover': {
+          backgroundColor: navItemHoverColor
         },
-        ":active": {
-          backgroundColor: theme.palette.neutralQuaternary
+        ':active': {
+          backgroundColor: navItemSelectedColor
         }
       }
     },
     navGroupSeparatorRoot: {
-      width: "100%",
+      width: '100%',
       height: hasGroupName
         ? navGroupSeparatorWithGroupNameHeight
         : navGroupSeparatorItemHeight,
-      textAlign: "center"
+      textAlign: 'center'
     },
     navGroupSeparatorHrLine: {
-      position: "relative",
-      height: "20px",
-      borderBottom: `1px solid ${theme.palette.neutralQuaternaryAlt}`
+      position: 'relative',
+      height: '20px',
+      borderBottom: `1px solid ${navItemWithChildBgColor}`
     },
     navGroupSeparatorHeaderGroupName: {
-      position: "absolute",
-      marginTop: "40px",
-      left: "16px",
-      color: "#000000",
-      fontWeight: "bold"
+      position: 'absolute',
+      marginTop: '40px',
+      left: '16px',
+      color: navTextColor,
+      fontWeight: 'bold'
     },
     navToggler: {
       height: navItemHeight,
-      cursor: "pointer",
+      cursor: 'pointer',
       selectors: {
-        ":hover": {
-          backgroundColor: theme.palette.neutralQuaternaryAlt
+        ':hover': {
+          backgroundColor: navItemHoverColor
         }
       },
-      textAlign: "left"
+      textAlign: 'left'
     },
     focusedStyle: [
       getFocusStyle(
@@ -199,17 +208,17 @@ export const getStyles = props => {
         undefined,
         undefined,
         undefined,
-        "transparent",
+        'transparent',
         undefined
       ),
       {
-        display: "block",
-        position: "relative",
+        display: 'block',
+        position: 'relative',
         height:
           !!nestingLevel && nestingLevel > 0
             ? navChildItemHeight
             : navItemHeight,
-        width: "100%",
+        width: '100%',
         lineHeight:
           !!nestingLevel && nestingLevel > 0
             ? navChildItemHeight

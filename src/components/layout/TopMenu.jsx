@@ -13,7 +13,7 @@ const getStyles = ({ theme }) => {
   return {
     root: {
       borderBottomStyle: 'solid',
-      borderBottomColor: theme.palette.neutralLight,
+      borderBottomColor: theme.semanticColors.bodyFrameDivider,
       borderBottomWidth: 1,
       padding: theme.spacing.s1
     }

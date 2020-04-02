@@ -1,11 +1,24 @@
 import React, { Suspense } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import {ProgressIndicator} from '@fluentui/react';
+import { ProgressIndicator, mergeStyles, styled } from '@fluentui/react';
+
 import { AutoSwitchLayout } from './components/layout';
 import { renderRoutes } from './components/route';
 import routeConfig from './routeConfig';
 
-function App() {
+function App({ theme }) {
+  React.useLayoutEffect(() => {
+    const { semanticColors } = theme;
+    mergeStyles({
+      selectors: {
+        ':global(body)': {
+          backgroundColor: semanticColors.bodyBackground,
+          color: semanticColors.bodyText
+        }
+      }
+    });
+  }, [theme]);
+
   return (
     <Router>
       <AutoSwitchLayout>
@@ -17,4 +30,4 @@ function App() {
   );
 }
 
-export default App;
+export default styled(App);
