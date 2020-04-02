@@ -1,13 +1,7 @@
 import React from 'react';
-import {
-  Stack,
-  Persona,
-  PersonaSize,
-  IconButton,
-  styled,
-  classNamesFunction
-} from '@fluentui/react';
-import { useAuthentication } from '../authentication';
+import { Stack, styled, classNamesFunction } from '@fluentui/react';
+import ThemeToggle from './ThemeToggle';
+import UserMenu from './UserMenu';
 
 const getStyles = ({ theme }) => {
   return {
@@ -15,7 +9,8 @@ const getStyles = ({ theme }) => {
       borderBottomStyle: 'solid',
       borderBottomColor: theme.semanticColors.bodyFrameDivider,
       borderBottomWidth: 1,
-      padding: theme.spacing.s1
+      padding: theme.spacing.s1,
+      height:48
     }
   };
 };
@@ -23,16 +18,15 @@ const getStyles = ({ theme }) => {
 const getClassNames = classNamesFunction();
 
 function TopMenu({ styles, theme }) {
-  const { principal, logout } = useAuthentication();
   const classNames = getClassNames(styles, { theme });
   return (
-    <Stack horizontal horizontalAlign="end" className={classNames.root}>
-      <Persona text={principal.username} size={PersonaSize.size32} />
-      <IconButton
-        iconProps={{ iconName: 'SignOut' }}
-        onClick={logout}
-        title="Logout"
-      />
+    <Stack
+      horizontal
+      horizontalAlign="end"
+      className={classNames.root}
+      tokens={{ childrenGap: '1em' }}>
+      <UserMenu />
+      <ThemeToggle />
     </Stack>
   );
 }

@@ -3,24 +3,17 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 import { initializeIcons } from '@uifabric/icons';
-import { Fabric, Customizer } from '@fluentui/react';
 import { AuthenticationProvider } from './components/authentication';
+import { ThemeProvider } from './components/theme';
 import App from './App';
-import {
-  TeamsCustomizations,
-  // WordCustomizations,
-  // DefaultCustomizations,
-  // DarkCustomizations
-} from '@uifabric/theme-samples';
+
 initializeIcons();
 
 ReactDOM.render(
   <AuthenticationProvider>
-    <Customizer {...TeamsCustomizations}>
-      <Fabric>
-        <App />
-      </Fabric>
-    </Customizer>
+    <ThemeProvider>
+      <App />
+    </ThemeProvider>
   </AuthenticationProvider>,
   document.getElementById('root')
 );

@@ -34,6 +34,11 @@ const routeConfig = hierarchize(
         component: React.lazy(() => import('./pages/Login'))
       },
       {
+        key: 'profile',
+        name: 'Profile',
+        isHidden: true
+      },
+      {
         key: 'order',
         name: 'Order',
         icon: 'visualizeApp',
@@ -73,14 +78,14 @@ const routeConfig = hierarchize(
             key: 'settings',
             name: 'Settings',
             icon: 'Settings',
-            children:[
+            children: [
               {
                 key: 'list',
-                name: 'List',
+                name: 'List'
               },
               {
                 key: 'unit',
-                name: 'Unit',
+                name: 'Unit'
               }
             ]
           }
