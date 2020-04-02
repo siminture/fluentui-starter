@@ -10,7 +10,7 @@ const getStyles = ({ theme }) => {
       borderBottomColor: theme.semanticColors.bodyFrameDivider,
       borderBottomWidth: 1,
       padding: theme.spacing.s1,
-      height:48
+      height: 48
     }
   };
 };
