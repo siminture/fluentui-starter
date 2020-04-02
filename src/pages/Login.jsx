@@ -8,12 +8,13 @@ import {
   MessageBar,
   MessageBarType,
   styled,
-  classNamesFunction
+  classNamesFunction,
+  ActionButton
 } from '@fluentui/react';
 import { useForm, Controller } from 'react-hook-form';
 import { useHistory, useLocation } from 'react-router-dom';
-
 import { useAuthentication } from '../components/authentication';
+import ThemeToggle from '../components/layout/ThemeToggle';
 
 const demoUsers = [
   {
@@ -66,9 +67,7 @@ const getClassNames = classNamesFunction();
 function LoginForm({ theme, styles }) {
   const classNames = getClassNames(styles, { theme });
   const { isAuthenticated, principal, login, logout } = useAuthentication();
-  const { handleSubmit, control, errors } = useForm({
-    mode: 'onBlur'
-  });
+  const { handleSubmit, control, errors } = useForm();
   const [error, setError] = React.useState();
 
   const onSubmit = values => {
@@ -122,6 +121,13 @@ function LoginForm({ theme, styles }) {
 
       {!isAuthenticated && (
         <form onSubmit={handleSubmit(onSubmit)}>
+           <Stack
+              horizontal
+              horizontalAlign="end"
+              verticalAlign="center"
+              >
+              <ThemeToggle as={DefaultButton} />
+            </Stack>
           <h3 className={classNames.title}>Login</h3>
           <Stack
             tokens={{
@@ -187,6 +193,8 @@ function LoginForm({ theme, styles }) {
                 {error}
               </MessageBar>
             )}
+
+           
           </Stack>
         </form>
       )}

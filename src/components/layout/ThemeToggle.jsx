@@ -2,7 +2,8 @@ import React from 'react';
 import { CommandBarButton } from '@fluentui/react';
 import { useTheme, ThemeList } from '../theme';
 
-function ThemeToggle() {
+function ThemeToggle({ as = CommandBarButton }) {
+  const ButtonComponent = as;
   const { theme, changeTheme } = useTheme();
   const menuItems = Object.keys(ThemeList).map(key => ({
     key,
@@ -17,7 +18,11 @@ function ThemeToggle() {
     items: menuItems
   };
 
-  return <CommandBarButton menuProps={menuProps} iconProps={{iconName:'Color'}}>{theme}</CommandBarButton>;
+  return (
+    <ButtonComponent menuProps={menuProps} iconProps={{ iconName: 'Color' }}>
+      {theme}
+    </ButtonComponent>
+  );
 }
 
 export default ThemeToggle;
