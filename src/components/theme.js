@@ -30,7 +30,7 @@ const ThemeWrapper = ({ children }) => {
 };
 
 export const ThemeProvider = ({ children }) => {
-  const [theme, setTheme] = useLocalStorage('themes', 'dark');
+  const [theme, setTheme] = useLocalStorage('theme', 'dark');
   const changeTheme = name => ThemeList[name] && setTheme(name);
   const value = { theme, changeTheme };
   return (
