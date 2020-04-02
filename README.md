@@ -6,6 +6,10 @@
 * Sidebar Layout, the nav items read from routeConfig
 * Dark Theme
 
+### Demo users
+* admin/admin
+* demo/demo
+
 ### Route Config
 ```javascript
 const routeConfig = hierarchize(
