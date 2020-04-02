@@ -8,7 +8,7 @@ export default function NoMatch() {
     <div>
       <h3>Coming soon.</h3>
       <p>
-        The requested Page <code>{location.pathname}</code> is coming soon.
+        The requested page <code>{location.pathname}</code> is coming soon.
       </p>
     </div>
   );

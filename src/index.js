@@ -10,13 +10,11 @@ import App from './App';
 initializeIcons();
 
 ReactDOM.render(
-  <React.StrictMode>
-    <AuthenticationProvider>
-      <Fabric>
-        <App />
-      </Fabric>
-    </AuthenticationProvider>
-  </React.StrictMode>,
+  <AuthenticationProvider>
+    <Fabric>
+      <App />
+    </Fabric>
+  </AuthenticationProvider>,
   document.getElementById('root')
 );
 

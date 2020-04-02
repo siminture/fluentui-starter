@@ -46,12 +46,11 @@ function remoteAuthService({ username, password }) {
 }
 
 function getStyles({ theme }) {
-  console.info(theme);
   return {
     root: {
       margin: '10em auto',
       width: '30em',
-      backgroundColor: theme.palette.neutralLight,
+      backgroundColor: theme.palette.neutralLighter,
       padding: theme.spacing.l2,
       borderRadius: theme.effects.roundedCorner2
     },
@@ -89,8 +88,6 @@ function LoginForm({ theme, styles }) {
   const history = useHistory();
   const location = useLocation();
   const { from } = location.state || { from: { pathname: '/' } };
-
-  console.info(theme);
 
   return (
     <Stack className={classNames.root}>
