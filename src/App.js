@@ -1,9 +1,10 @@
 import React, { Suspense } from 'react';
+import { hot } from 'react-hot-loader';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { ProgressIndicator, styled } from '@fluentui/react';
 
 import { AutoSwitchLayout } from './components/layout';
-import { renderRoutes } from './components/route';
+import { renderRoutes } from './components/util/route';
 import routeConfig from './routeConfig';
 
 function App({ theme }) {
@@ -24,4 +25,7 @@ function App({ theme }) {
   );
 }
 
-export default styled(App);
+// Live reload != hot reload! CRA doesn't do hot reload, so we install it here.
+let HotApp = process.env.NODE_ENV === 'production' ? App : hot(module)(App);
+
+export default styled(HotApp);
