@@ -1,7 +1,9 @@
 import React from 'react';
-import get from 'lodash/get';
-import { hierarchize } from './libraries/hierarchical';
+import {get} from 'lodash-es';
 import paths from 'path';
+
+import { hierarchize } from './util/hierarchical';
+
 const keyName = 'key';
 const pathName = 'path';
 const uniqueKeyName = 'uniqueKey';
@@ -24,14 +26,14 @@ const routeConfig = hierarchize(
     name: 'Home',
     icon: 'Home',
     path: '/',
-    component: React.lazy(() => import('./pages/dashboard')),
+    component: React.lazy(() => import('./components/pages/Dashboard')),
     children: [
       {
         key: 'login',
         name: 'Login',
         isPublic: true,
         isHidden: true,
-        component: React.lazy(() => import('./pages/Login'))
+        component: React.lazy(() => import('./components/pages/Login')),
       },
       {
         key: 'profile',
@@ -46,7 +48,6 @@ const routeConfig = hierarchize(
           {
             key: 'purchase-order',
             name: 'Purchase Order',
-            component: React.lazy(() => import('./pages/order/purchase'))
           },
           {
             key: 'sales-order',
@@ -97,6 +98,6 @@ const routeConfig = hierarchize(
   pathGenerator
 );
 
-// console.log(routeConfig);
+console.log(routeConfig);
 
 export default routeConfig;

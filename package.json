@@ -8,14 +8,18 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "@uifabric/theme-samples": "^7.0.47",
+    "lodash-es": "^4.17.15",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-hook-form": "^5.2.0",
+    "react-hot-loader": "^4.12.21",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
     "react-use": "^13.27.1"
   },
   "scripts": {
+    "upgrade-deps": "npx ncu -u && yarn && yarn upgrade",
+    "analyze": "node scripts/analyze.js",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -35,5 +39,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "webpack-bundle-analyzer": "^3.7.0"
   }
 }

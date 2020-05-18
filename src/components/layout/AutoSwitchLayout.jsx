@@ -1,7 +1,7 @@
 import React from 'react';
-import { useAuthentication } from '../authentication';
-import MasterLayout from './MasterLayout';
-import BlankLayout from './BlankLayout';
+import { useAuthentication } from '../util/authentication';
+import {MasterLayout} from './MasterLayout';
+import { BlankLayout } from './BlankLayout';
 
 export function AutoSwitchLayout({ children }) {
   const { isAuthenticated } = useAuthentication();

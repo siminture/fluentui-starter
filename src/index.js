@@ -1,11 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import * as serviceWorker from './serviceWorker';
 import { initializeIcons } from '@uifabric/icons';
-import { AuthenticationProvider } from './components/authentication';
-import { ThemeProvider } from './components/theme';
+
+import './index.css';
 import App from './App';
+import * as serviceWorker from './serviceWorker';
+import { AuthenticationProvider } from './components/util/authentication';
+import { ThemeProvider } from './components/util/theme';
 
 initializeIcons();
 
