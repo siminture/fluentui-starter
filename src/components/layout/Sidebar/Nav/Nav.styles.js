@@ -1,7 +1,7 @@
-import { AnimationClassNames, getFocusStyle } from '@fluentui/react';
+import {AnimationClassNames, getFocusStyle} from '@fluentui/react';
 
-export const getStyles = props => {
-  const {
+export function getStyles(
+  {
     isSelected,
     hasChildren,
     nestingLevel,
@@ -9,9 +9,10 @@ export const getStyles = props => {
     scrollTop,
     isChildLinkSelected,
     hasGroupName,
-    theme
-  } = props;
-  const { semanticColors, fonts } = theme;
+    theme,
+  }
+) {
+  const {semanticColors, fonts} = theme;
 
   const navFontSize = fonts.medium.fontSize;
   const navTextColor = semanticColors.menuItemText;
@@ -32,6 +33,7 @@ export const getStyles = props => {
   const navFloatingItemIndentSize = 20;
   const BackDropSelector =
     '@supports (backdrop-filter: blur(20px)) or (-webkit-backdrop-filter: blur(20px))';
+  const MouseEnabledDeviceSelector = '@media (hover: hover) and (pointer: fine)';
 
   return {
     root: {
@@ -49,10 +51,14 @@ export const getStyles = props => {
           margin: 0,
           fontSize: navFontSize,
           selectors: {
-            'li:hover >div': {
-              display: 'block'
+            [MouseEnabledDeviceSelector]: {
+              selectors: {
+                'li:hover >div': {
+                  display: 'block'
+                }
+              }
             }
-          }
+          },
         },
         a: {
           color: `${navTextColor} !important`,
@@ -226,4 +232,4 @@ export const getStyles = props => {
       }
     ]
   };
-};
+}
