@@ -3,19 +3,19 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@fluentui/react": "^7.105.6",
+    "@fluentui/react": "^7.148.2",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
-    "@uifabric/theme-samples": "^7.0.47",
+    "@uifabric/theme-samples": "^7.1.36",
     "lodash-es": "^4.17.15",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-hook-form": "^5.2.0",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
+    "react-hook-form": "^6.9.6",
     "react-hot-loader": "^4.12.21",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.4.1",
-    "react-use": "^13.27.1"
+    "react-scripts": "^3.4.4",
+    "react-use": "^15.3.4"
   },
   "scripts": {
     "upgrade-deps": "npx ncu -u && yarn && yarn upgrade",

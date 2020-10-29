@@ -1,33 +1,32 @@
-import React from 'react';
 import {
+  classNamesFunction,
   DefaultButton,
-  PrimaryButton,
   Link,
-  TextField,
-  Stack,
   MessageBar,
   MessageBarType,
+  PrimaryButton,
+  Stack,
   styled,
-  classNamesFunction,
+  TextField,
 } from '@fluentui/react';
-import { useForm, Controller } from 'react-hook-form';
+import React from 'react';
+import { Controller, useForm } from 'react-hook-form';
 import { useHistory, useLocation } from 'react-router-dom';
-import { useAuthentication } from '../../util/authentication';
 import { ThemeToggle } from '../../molecules/ThemeToggle';
+import { useAuthentication } from '../../util/authentication';
 
 const demoUsers = [
   {
     username: 'admin',
     password: 'admin',
-    roles: ['admin']
+    roles: ['admin'],
   },
   {
     username: 'demo',
     password: 'demo',
-    roles: ['user']
-  }
+    roles: ['user'],
+  },
 ];
-
 
 const getClassNames = classNamesFunction();
 
@@ -44,21 +43,17 @@ function LoginForm({ theme, styles }) {
   return (
     <Stack className={classNames.root}>
       {isAuthenticated && (
-        <Stack tokens={{childrenGap: '1em'}}>
+        <Stack tokens={{ childrenGap: '1em' }}>
           <h3 className={classNames.title}>
             {principal.username}, you are already signed in.
           </h3>
-          <Stack
-            horizontal
-            tokens={{childrenGap: '1em'}}>
+          <Stack horizontal tokens={{ childrenGap: '1em' }}>
             <PrimaryButton
               onClick={() => history.push('/')}
               iconProps={{ iconName: 'Home' }}>
               Go to Home
             </PrimaryButton>
-            <DefaultButton
-              onClick={logout}
-              iconProps={{ iconName: 'SignOut' }}>
+            <DefaultButton onClick={logout} iconProps={{ iconName: 'SignOut' }}>
               Logout
             </DefaultButton>
           </Stack>
@@ -67,17 +62,13 @@ function LoginForm({ theme, styles }) {
 
       {!isAuthenticated && (
         <form onSubmit={handleSubmit(onSubmit)}>
-           <Stack
-              horizontal
-              horizontalAlign="end"
-              verticalAlign="center"
-              >
-              <ThemeToggle as={DefaultButton} />
-            </Stack>
+          <Stack horizontal horizontalAlign="end" verticalAlign="center">
+            <ThemeToggle as={DefaultButton} />
+          </Stack>
           <h3 className={classNames.title}>Login</h3>
           <Stack
             tokens={{
-              childrenGap: '1em'
+              childrenGap: '1em',
             }}>
             <Controller
               as={TextField}
@@ -88,14 +79,15 @@ function LoginForm({ theme, styles }) {
               autoFocus
               minLength={3}
               maxLength={32}
+              defaultValue=""
               name="username"
               rules={{
                 required: 'Please enter your username',
                 minLength: {
                   value: 3,
-                  message: 'Please enter your username'
+                  message: 'Please enter your username',
                 },
-                maxLength: { value: 32, message: 'Username is too long' }
+                maxLength: { value: 32, message: 'Username is too long' },
               }}
             />
 
@@ -117,16 +109,16 @@ function LoginForm({ theme, styles }) {
                 required: 'Please enter your password',
                 minLength: {
                   value: 4,
-                  message: 'Please enter your password'
+                  message: 'Please enter your password',
                 },
-                maxLength: { value: 64, message: 'Password is too long' }
+                maxLength: { value: 64, message: 'Password is too long' },
               }}
             />
 
             <Stack
               horizontal
               horizontalAlign="end"
-              tokens={{childrenGap: '1em'}}>
+              tokens={{ childrenGap: '1em' }}>
               <Link>Find my password</Link>
               <PrimaryButton type="submit">Login</PrimaryButton>
             </Stack>
@@ -137,39 +129,38 @@ function LoginForm({ theme, styles }) {
                 {error}
               </MessageBar>
             )}
-
-           
           </Stack>
         </form>
       )}
     </Stack>
   );
 
-  function onSubmit (values) {
+  function onSubmit(values) {
     setError(null);
     remoteAuthService(values)
-      .then(identity => {
+      .then((identity) => {
         login(identity);
         history.replace(from);
       })
       .catch(setError);
   }
 
-  function getErrorMessage (name) {
+  function getErrorMessage(name) {
     return errors[name]?.message;
   }
 }
 
-
 function remoteAuthService({ username, password }) {
-  const found = demoUsers.find(user => username.toLocaleLowerCase() === user.username);
+  const found = demoUsers.find(
+    (user) => username.toLocaleLowerCase() === user.username
+  );
 
   if (found?.password === password) {
     return Promise.resolve({
       username: found.username,
       token: username + '_' + Math.random(),
       displayName: found.displayName,
-      roles: found.roles
+      roles: found.roles,
     });
   } else {
     return Promise.reject('Incorrect username or password');
@@ -183,14 +174,13 @@ function getStyles({ theme }) {
       width: '30em',
       backgroundColor: theme.palette.neutralLighter,
       padding: theme.spacing.l2,
-      borderRadius: theme.effects.roundedCorner2
+      borderRadius: theme.effects.roundedCorner2,
     },
     title: {
       ...theme.fonts.xLargePlus,
-      marginTop: 0
-    }
+      marginTop: 0,
+    },
   };
 }
-
 
 export default styled(LoginForm, getStyles);
