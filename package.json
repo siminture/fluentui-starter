@@ -8,13 +8,14 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "@uifabric/theme-samples": "^7.1.36",
+    "browserslist": "^4.16.6",
     "lodash-es": "^4.17.15",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "react-hook-form": "^6.9.6",
     "react-hot-loader": "^4.12.21",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "^3.4.4",
+    "react-scripts": "4.0.3",
     "react-use": "^15.3.4"
   },
   "scripts": {
