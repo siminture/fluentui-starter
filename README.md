@@ -6,10 +6,10 @@
 
 ### Dependencies 
 
-- [Fluent UI React] (https://github.com/microsoft/fluentui)
-- [react-use] (https://github.com/streamich/react-use)
-- [react-hook-form] (https://github.com/react-hook-form/react-hook-form)
-- [react-router-dom] (https://github.com/ReactTraining/react-router)
+- [Fluent UI React](https://github.com/microsoft/fluentui)
+- [react-use](https://github.com/streamich/react-use)
+- [react-hook-form](https://github.com/react-hook-form/react-hook-form)
+- [react-router-dom](https://github.com/ReactTraining/react-router)
 
 ### Features
 
