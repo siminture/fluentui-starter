@@ -3,12 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fluentui/react": "^8.20.0",
+    "@fluentui/theme-samples": "^8.1.26",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-hook-form": "^7.9.0",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
+    "react-use": "^17.2.4",
     "web-vitals": "^1.0.1"
   },
   "scripts": {

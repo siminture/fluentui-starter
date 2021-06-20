@@ -1,14 +1,25 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+
+import { initializeIcons } from "@fluentui/react/lib/Icons";
+
+import { DynamicThemeProvider } from "./global/themes";
+import { AuthenticationProvider } from "./global/authentication";
+
+initializeIcons();
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <AuthenticationProvider>
+      <DynamicThemeProvider>
+        <App />
+      </DynamicThemeProvider>
+    </AuthenticationProvider>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function

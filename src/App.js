@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Suspense } from 'react';
+import "./App.css";
+import { BrowserRouter as Router } from 'react-router-dom';
+import { ProgressIndicator, styled } from '@fluentui/react';
+import { AutoSwitchLayout } from './components/layout';
+import { renderRoutes } from './components/route';
+import routeConfig from './routeConfig';
 
-function App() {
+function App({theme}) {
+  const { semanticColors } = theme;
+  React.useLayoutEffect(() => {
+    document.body.style.backgroundColor = semanticColors.bodyBackground;
+    document.body.style.color = semanticColors.bodyText;
+  }, [semanticColors]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <AutoSwitchLayout>
+        <Suspense fallback={<ProgressIndicator label="Page loading..." />}>
+          {renderRoutes(routeConfig)}
+        </Suspense>
+      </AutoSwitchLayout>
+    </Router>
   );
 }
 
-export default App;
+export default styled(App);
