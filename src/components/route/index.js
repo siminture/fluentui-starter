@@ -1,9 +1,5 @@
-export * from "../../pages/ComingSoon/ComingSoon";
-export * from "../../pages/NoMatch/NoMatch";
-export * from "./RouteIndex";
-
-export * from "./renderRoutes";
+export * from "./ComingSoon";
+export * from "./NoMatch";
+export * from "./RouteLink";
+export * from "./RouteIndexList";
 export * from "./AuthorizedRoute";
-
-export * from "./useRoutePath";
-

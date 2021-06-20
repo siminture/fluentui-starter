@@ -152,10 +152,10 @@ function LoginForm({ theme, styles }) {
             </Stack>
             <Stack>
               <h3>Demo users</h3>
-              <ui>
+              <ul>
                 <li>demo/demo</li>
                 <li>admin/admin</li>
-              </ui>
+              </ul>
             </Stack>
             {error && (
               <MessageBar

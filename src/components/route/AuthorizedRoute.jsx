@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import { useAuthentication } from "global/authentication";
 
-export default function AuthorizedRoute({
+export function AuthorizedRoute({
   id,
   path,
   exact,

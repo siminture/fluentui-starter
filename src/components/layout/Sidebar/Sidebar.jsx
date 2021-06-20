@@ -1,52 +1,32 @@
 import React from "react";
-import isArray from "lodash/isArray";
-import { useHistory } from "react-router-dom";
+import { isArray } from "lodash";
+import { useHistory, useLocation, matchPath } from "react-router-dom";
 import { NavToggler } from "./Nav";
-import { useRoutePath } from "components/route";
-import routeConfig from "routeConfig";
+import { findNode, getParents } from "global/hierarchical";
+import routes from "routes";
+
+function findRoute(pathname) {
+  const current = findNode(routes, (route) => {
+    const match = matchPath(pathname, route);
+    return match?.isExact;
+  });
+  const paths = current ? getParents(current) : [];
+  return { current, paths };
+}
 
 function isVisible(route) {
-  return !route.isHidden;
+  return route.isHidden !== true;
+}
+
+function hasChildren(route) {
+  return route?.children?.filter(isVisible).length;
 }
 
 export function Sidebar() {
   const history = useHistory();
-  const { current, paths } = useRoutePath();
+  const { pathname } = useLocation();
 
-  const homeLink = mapRouteToNavLink(routeConfig, false);
-  const topPageLinks = routeConfig.children
-    .filter((route) => isVisible(route) && !isArray(route.children))
-    .map((route) => mapRouteToNavLink(route, false));
-
-  const groupLinks = routeConfig.children.filter(hasChildren).map((route) => ({
-    name: route.name,
-    groupType: "MenuGroup",
-    links: route.children
-      .filter(isVisible)
-      .map((child) => mapRouteToNavLink(child, true)),
-  }));
-
-  const navLinkGroups = [
-    {
-      links: [
-        {
-          key: "Collapse",
-          name: "Collapsed",
-          alternateText: "Expanded",
-          icon: "GlobalNavButton",
-          title: "Collapse",
-        },
-      ],
-      groupType: "ToggleGroup",
-    },
-    {
-      links: [homeLink, ...topPageLinks],
-      groupType: "MenuGroup",
-    },
-    ...groupLinks,
-  ];
-
-  return <NavToggler groups={navLinkGroups} selectedKey={current?.uniqueKey} />;
+  const { current, paths } = findRoute(pathname);
 
   function mapRouteToNavLink(route, deeply = true) {
     return {
@@ -77,7 +57,38 @@ export function Sidebar() {
     };
   }
 
-  function hasChildren(route) {
-    return route?.children?.filter(isVisible).length;
-  }
+  const homeLink = mapRouteToNavLink(routes, false);
+  const topPageLinks = routes.children
+    .filter((route) => isVisible(route) && !isArray(route.children))
+    .map((route) => mapRouteToNavLink(route, false));
+
+  const groupLinks = routes.children.filter(hasChildren).map((route) => ({
+    name: route.name,
+    groupType: "MenuGroup",
+    links: route.children
+      .filter(isVisible)
+      .map((child) => mapRouteToNavLink(child, true)),
+  }));
+
+  const navLinkGroups = [
+    {
+      links: [
+        {
+          key: "Collapse",
+          name: "Collapsed",
+          alternateText: "Expanded",
+          icon: "GlobalNavButton",
+          title: "Collapse",
+        },
+      ],
+      groupType: "ToggleGroup",
+    },
+    {
+      links: [homeLink, ...topPageLinks],
+      groupType: "MenuGroup",
+    },
+    ...groupLinks,
+  ];
+
+  return <NavToggler groups={navLinkGroups} selectedKey={current?.uniqueKey} />;
 }

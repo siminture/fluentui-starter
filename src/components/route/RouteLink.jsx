@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "@fluentui/react";
 import { useHistory } from "react-router-dom";
 
-function RouteLink(props) {
+export function RouteLink(props) {
   const history = useHistory();
   const handleClick = (e) => {
     e.preventDefault();
@@ -12,4 +12,3 @@ function RouteLink(props) {
   return <Link {...props} onClick={handleClick} />;
 }
 
-export default RouteLink;
