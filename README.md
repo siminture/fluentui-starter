@@ -1,13 +1,15 @@
 ## A Fluent UI Starter for Admin Application
 
-### The Fluent UI has been upgrade to version 8.x, the old version please see the Tag [fluentui_7x](https://github.com/siminture/fluentui-starter/releases/tag/fluentui_7x)
+### The Fluent UI has been upgrade to version 8.x, the old version please see the Tag 
+
+#### [fluentui_7x](https://github.com/siminture/fluentui-starter/releases/tag/fluentui_7x)
 
 ### Dependencies 
 
 - [Fluent UI React] (https://github.com/microsoft/fluentui)
-- [react-use](https://github.com/streamich/react-use)
-- [react-hook-form](https://github.com/react-hook-form/react-hook-form)
-- [react-router-dom](https://github.com/ReactTraining/react-router)
+- [react-use] (https://github.com/streamich/react-use)
+- [react-hook-form] (https://github.com/react-hook-form/react-hook-form)
+- [react-router-dom] (https://github.com/ReactTraining/react-router)
 
 ### Features
 
