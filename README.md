@@ -1,5 +1,7 @@
 ## A Fluent UI Starter for Admin Application
 
+### [Demo Url](https://simmy.tech/fluentui-starter)
+
 ### The Fluent UI has been upgrade to version 8.x, the old version please see the Tag 
 
 #### [fluentui_7x](https://github.com/siminture/fluentui-starter/releases/tag/fluentui_7x)
