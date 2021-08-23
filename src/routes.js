@@ -27,6 +27,7 @@ const routes = {
         {
           key: "purchase-order",
           name: "Purchase Order",
+          component: React.lazy(() => import("./pages/PurchaseOrder")),
         },
         {
           key: "sales-order",
