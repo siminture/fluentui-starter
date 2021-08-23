@@ -1,28 +1,32 @@
 {
   "files": {
-    "main.css": "/fluentui-starter/static/css/main.2c881aa2.chunk.css",
-    "main.js": "/fluentui-starter/static/js/main.092709a7.chunk.js",
-    "main.js.map": "/fluentui-starter/static/js/main.092709a7.chunk.js.map",
-    "runtime-main.js": "/fluentui-starter/static/js/runtime-main.bc9c7820.js",
-    "runtime-main.js.map": "/fluentui-starter/static/js/runtime-main.bc9c7820.js.map",
-    "static/js/2.ebd4b024.chunk.js": "/fluentui-starter/static/js/2.ebd4b024.chunk.js",
-    "static/js/2.ebd4b024.chunk.js.map": "/fluentui-starter/static/js/2.ebd4b024.chunk.js.map",
-    "static/js/3.73e14ecb.chunk.js": "/fluentui-starter/static/js/3.73e14ecb.chunk.js",
-    "static/js/3.73e14ecb.chunk.js.map": "/fluentui-starter/static/js/3.73e14ecb.chunk.js.map",
-    "static/js/4.6999ef98.chunk.js": "/fluentui-starter/static/js/4.6999ef98.chunk.js",
-    "static/js/4.6999ef98.chunk.js.map": "/fluentui-starter/static/js/4.6999ef98.chunk.js.map",
-    "static/js/5.54ea7516.chunk.js": "/fluentui-starter/static/js/5.54ea7516.chunk.js",
-    "static/js/5.54ea7516.chunk.js.map": "/fluentui-starter/static/js/5.54ea7516.chunk.js.map",
-    "static/js/6.2ef4794e.chunk.js": "/fluentui-starter/static/js/6.2ef4794e.chunk.js",
-    "static/js/6.2ef4794e.chunk.js.map": "/fluentui-starter/static/js/6.2ef4794e.chunk.js.map",
+    "main.css": "/fluentui-starter/static/css/main.bf807488.chunk.css",
+    "main.js": "/fluentui-starter/static/js/main.cda8c22f.chunk.js",
+    "main.js.map": "/fluentui-starter/static/js/main.cda8c22f.chunk.js.map",
+    "runtime-main.js": "/fluentui-starter/static/js/runtime-main.868346e4.js",
+    "runtime-main.js.map": "/fluentui-starter/static/js/runtime-main.868346e4.js.map",
+    "static/js/2.1ea98dd9.chunk.js": "/fluentui-starter/static/js/2.1ea98dd9.chunk.js",
+    "static/js/2.1ea98dd9.chunk.js.map": "/fluentui-starter/static/js/2.1ea98dd9.chunk.js.map",
+    "static/js/3.4982bcac.chunk.js": "/fluentui-starter/static/js/3.4982bcac.chunk.js",
+    "static/js/3.4982bcac.chunk.js.map": "/fluentui-starter/static/js/3.4982bcac.chunk.js.map",
+    "static/js/4.61ce3dd2.chunk.js": "/fluentui-starter/static/js/4.61ce3dd2.chunk.js",
+    "static/js/4.61ce3dd2.chunk.js.map": "/fluentui-starter/static/js/4.61ce3dd2.chunk.js.map",
+    "static/js/5.56e35733.chunk.js": "/fluentui-starter/static/js/5.56e35733.chunk.js",
+    "static/js/5.56e35733.chunk.js.map": "/fluentui-starter/static/js/5.56e35733.chunk.js.map",
+    "static/js/6.24926bfc.chunk.js": "/fluentui-starter/static/js/6.24926bfc.chunk.js",
+    "static/js/6.24926bfc.chunk.js.map": "/fluentui-starter/static/js/6.24926bfc.chunk.js.map",
+    "static/js/7.dd4e06bb.chunk.js": "/fluentui-starter/static/js/7.dd4e06bb.chunk.js",
+    "static/js/7.dd4e06bb.chunk.js.map": "/fluentui-starter/static/js/7.dd4e06bb.chunk.js.map",
+    "static/js/8.cc9a426d.chunk.js": "/fluentui-starter/static/js/8.cc9a426d.chunk.js",
+    "static/js/8.cc9a426d.chunk.js.map": "/fluentui-starter/static/js/8.cc9a426d.chunk.js.map",
     "index.html": "/fluentui-starter/index.html",
-    "static/css/main.2c881aa2.chunk.css.map": "/fluentui-starter/static/css/main.2c881aa2.chunk.css.map",
-    "static/js/2.ebd4b024.chunk.js.LICENSE.txt": "/fluentui-starter/static/js/2.ebd4b024.chunk.js.LICENSE.txt"
+    "static/css/main.bf807488.chunk.css.map": "/fluentui-starter/static/css/main.bf807488.chunk.css.map",
+    "static/js/2.1ea98dd9.chunk.js.LICENSE.txt": "/fluentui-starter/static/js/2.1ea98dd9.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.bc9c7820.js",
-    "static/js/2.ebd4b024.chunk.js",
-    "static/css/main.2c881aa2.chunk.css",
-    "static/js/main.092709a7.chunk.js"
+    "static/js/runtime-main.868346e4.js",
+    "static/js/2.1ea98dd9.chunk.js",
+    "static/css/main.bf807488.chunk.css",
+    "static/js/main.cda8c22f.chunk.js"
   ]
 }

@@ -1,0 +1,2 @@
+(this["webpackJsonpfluentui-starter"]=this["webpackJsonpfluentui-starter"]||[]).push([[6],{218:function(t,e,n){"use strict";n.r(e),n.d(e,"default",(function(){return s}));n(0);var r=n(2);function s(){return Object(r.jsx)("div",{children:Object(r.jsx)("h3",{children:"Dashboard Page"})})}}}]);
+//# sourceMappingURL=6.24926bfc.chunk.js.map
